@@ -1,0 +1,7 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "KMR221GLFS")(type "KiCad")(uri "${KIPRJMOD}/Parts/01Symbols/KMR221GLFS.kicad_sym")(options "")(descr ""))
+  (lib (name "TYPE-C_16PIN_2MD__073_")(type "KiCad")(uri "${KIPRJMOD}/Parts/01Symbols/TYPE-C_16PIN_2MD__073_.kicad_sym")(options "")(descr ""))
+  (lib (name "OPA350UA_2K5G4")(type "KiCad")(uri "${KIPRJMOD}/Parts/01Symbols/OPA350UA_2K5G4.kicad_sym")(options "")(descr ""))
+  (lib (name "TVS3V3L4U")(type "KiCad")(uri "${KIPRJMOD}/Parts/01Symbols/TVS3V3L4U.kicad_sym")(options "")(descr ""))
+)
