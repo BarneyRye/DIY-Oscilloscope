@@ -105,25 +105,17 @@
 
 /* USER CODE BEGIN PV */
   float BIAS_VOLTAGE = 1.65f; //Bias Voltage
-  volatile uint8_t CHL_Select_State = 0; //Channel Select Button State
-  volatile uint8_t Pause_State = 0; //Pause Button State
-  volatile uint8_t Auto_Scale_Y_State = 0; //Auto Scale Y State
-  volatile uint8_t Scale_Axis_State = 0; //Scale Axis Button State 0->x, 1->y
-  volatile int8_t Trig_Voltage = 0; //Set Initial Trigger Voltage
-  volatile uint8_t Trig_Flag = 0;
-  uint16_t Last_ADC_Trig = 0;
-  volatile uint16_t Trig_ADC_Value = 2048;
+  uint8_t CHL_Select_State = 0 //Channel Select Button State
+  uint8_t Pause_State = 0; //Pause Button State
+  uint8_t Auto_Scale_Y_State = 1; //Auto Scale Y State
+  uint8_t Scale_Axis_State = 0; //Scale Axis Button State 0->x, 1->y
+  int8_t Trig_Voltage = 0; //Set Initial Trigger Voltage
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
+
 /* USER CODE BEGIN PFP */
-float VBias_Init(uint16_t *adc_buffer);
-void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV);
-void Set_Trig_Value(void);
-float ADC_Convert(uint16_t *adc_input, float *Vin );
-float VmaxABS(float *buffer);
-float Auto_Scale_Y(float *buffer);
+void SystemClock_Config(void);
 
 /* USER CODE END PFP */
 
@@ -178,8 +170,6 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUFFER_SIZE); //Start ADC with DMA
   HAL_Delay(100); //Delay for ADC to stabilise and fill buffer
   VBias_Init(adc_buffer); //Initialise Bias Voltage
-
-  HAL_ADC_Start_IT(&hadc1);
 
   HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL); //Start Encoder 1
   __HAL_TIM_SET_COUNTER(&htim2, 0x7FFFFFFF); //Set Encoder 1 counter to middle value
@@ -282,7 +272,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         case GPIO_PIN_14: // PC14 -- CHL_Select Button
             // handle PC14 interrupt
         	CHL_Select_State = !CHL_Select_State;
-        	ADC_SetTrigger();
             break;
         case GPIO_PIN_13: // PC13 -- Pause Button
             // handle PC13 interrupt
@@ -303,18 +292,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 }
 
-void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc) {
-	if (hadc->Instance == ADC1) {
-		//Trigger
-		uint16_t current_ADC = HAL_ADC_GetValue(hadc);
-		if (current_ADC >= Trig_ADC_Value && Last_ADC_Trig < Trig_ADC_Value) {
-		Trig_Flag = 1;
-		}
-	Last_ADC_Value = current_ADC;
-	}
-}
-
-float VBias_Init(uint16_t *adc_buffer) {
+float VBias_Init(uint16_t *adc_buffer){
 	//Initialise Bias Voltage
 	uint32_t adc_sum = 0;
 	for (int i=0; i<ADC_BUFFER_SIZE; i++) {
@@ -389,14 +367,10 @@ void Set_Trig_Value(void) {
 		if (Temp_Trig_Voltage > 20) {Trig_Voltage = 20;}
 		else if (Temp_Trig_Voltage) {Trig_Voltage = -20;}
 		else {Trig_Voltage = Temp_Trig_Voltage;}
-
-		float Trig_Voltage_Adj = (float(Trig_Voltage) / ATTENUATION_FACTOR * OP_AMP_GAIN) + BIAS_VOLTAGE;
-		Trig_ADC_Value = (uint16_t)(Trig_Voltage_Adj * (ADC_12BIT/VRef));
-		ADC_SetTrigger();
 	}
 }
 
-float ADC_Convert(uint16_t *adc_input, float *Vin ) {
+float ADC_Convert(uint16_t *adc_input, float *Vin ){
 	//Scale ADC input based on schematic design
 	//ADC input range: 0-3.3V (0-4095), VRef = 3.3V
 	//Scope input range: +/-20v
@@ -436,21 +410,6 @@ float Auto_Scale_Y(float *buffer) {
 			return = div_Levels[i];
 		}
 	}
-}
-
-void ADC_SetTrigger(void) {
-
-	uint32_t CHANNEL;
-	if (!CHL_Select_State) {CHANNEL = ADC_CHANNEL_3;}
-	else {CHANNEL = ADC_CHANNEL_4;}
-
-	HAL_ADC_AnalogWDGConfigTypeDef awdConfig;
-	awdConfig.WatchdogNumber = ADC_ANALOGWATCHDOG_1;
-	awdConfig.Channel = CHANNEL;
-	awdConfig.ITMode = ENABLE;
-	awdConfig.HighThreshold = Trig_ADC_Value;
-	awdConfig.LowThreshold  = 0; // keep low
-	HAL_ADC_AnalogWDGConfig(&hadc1, &awdConfig);
 }
 /* USER CODE END 4 */
 
