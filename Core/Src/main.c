@@ -84,9 +84,9 @@
 #define ADC_BUFFER_SIZE 1024 //Size of ADC DMA buffer
 
 #define X_DIVISIONS 20.0f // 20 X divisions
-#define Y_DEVISIONS 10.0f // +/- 10 Y divisions
+#define Y_DIVISIONS 10.0f // +/- 10 Y divisions
 //50Hz input min, 25KHz input max
-//Atleast 10 Waveforms, meaning 2 div per wavefront
+//At least 10 Waveforms, meaning 2 div per wavefront
 //Min 1 Waveform, meaning 20 div per wavefront
 //Max T(1/50) * (1/2) = 0.01s, Min T(1/25K) * 1/20 = 2e-6s = 0.000002
 #define X_DIV_LEVELS 0.000002f, 0.0000025f, 0.000003f, 0.000004f, 0.000005f, 0.000008f, 0.00001f, 0.000015f, 0.00002f, 0.000025f, 0.00003f, 0.00004f, 0.00005f, 0.00008f, 0.0001f, 0.00015f, 0.0002f, 0.00025f, 0.0003f, 0.0004f, 0.0005f, 0.0008f, 0.001f, 0.0015f, 0.002f, 0.0025f, 0.003f, 0.004f, 0.005f, 0.008f, 0.01f
@@ -124,6 +124,9 @@ void Set_Trig_Value(void);
 float ADC_Convert(uint16_t *adc_input, float *Vin );
 float VmaxABS(float *buffer);
 float Auto_Scale_Y(float *buffer);
+void ADC_SetTrigger(void);
+void DWT_Init(void);
+uint32_t Micros(void);
 
 /* USER CODE END PFP */
 
@@ -197,6 +200,9 @@ int main(void)
   ILI9341_Init();
 
   float plot_buffer[ADC_BUFFER_SIZE];
+
+  DWAT_Init(); //Initialize DWT for Micros() function
+  uint32_t Last_Trig_Time = Micros(); 
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -206,14 +212,24 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    uint32_t Total_Display_Time = xDIV * X_DIVISIONS * 1000; //Total time (ms) displayed on screen
+    if (Trig_Flag && (Micros() - Last_Trig_Time >= Total_Display_Time) ) {
+      ADC_Convert(adc_buffer, Vin_buffer);
+      HAL_ADC_Stop_DMA(&hadc1); //Stop ADC DMA
+      HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUFFER_SIZE); //Restart ADC DMA
+      Trig_Flag = 0;
+      Last_Trig_Time = Micros();
+    }
+    else {Trig_Flag = 0;}
+
 	  if (!CHL_Select_State){
 		  for (uint16_t i=0; i<ADC_BUFFER_SIZE; i++){
-			  plot_Buffer = Vin_buffer[2*i];
+			  plot_buffer[i] = Vin_buffer[2*i];
 		  }
 	  }
 	  else {
 		  for (uint16_t i=0; i<ADC_BUFFER_SIZE; i++){
-			  plot_Buffer = Vin_buffer[2*i+1];
+			  plot_buffer[i] = Vin_buffer[2*i+1];
 		  }
 	  }
 
@@ -222,7 +238,7 @@ int main(void)
 
 	  if (!Pause_State){
 		  ILI9341_Clear(BLACK);
-		  ILI9341_DrawAxis(Y_DEVISIONS, X_DIVISIONS);
+		  ILI9341_DrawAxis(Y_DIVISIONS, X_DIVISIONS);
 		  ILI9341_PlotWaveform(plot_buffer,xDIV,yDIV);
 	  }
   }
@@ -275,8 +291,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     switch(GPIO_Pin)
     {
         case GPIO_PIN_14: // PC14 -- CHL_Select Button
@@ -332,41 +347,41 @@ void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV) {
 
 	}
 	else if (TIM2_New_Count != TIM2_Count) {
-		int steps = (TIM2_New_count - TIM2_Count) / 4;
+		int steps = (TIM2_New_Count - TIM2_Count) / 4;
 		TIM2_Count = TIM2_New_Count;
 		if (Scale_Axis_State == 0) {
 			//X-Axis Scaling
 			//Adjust Time/Div based on delta
 			float xdiv_Levels[] = {X_DIV_LEVELS}; //V/div levels
-			int xdiv_Levels_Size = sizeof(xdiv_Levels)/sizeof(xdiv_Levels[0])
+			int xdiv_Levels_Size = sizeof(xdiv_Levels)/sizeof(xdiv_Levels[0]);
 			static int xlocation = 255;
 			if (xlocation == 255) {
-				for (uint8_t i=0; i<xdiv_Levels_Size; i_++) {
-					if (xdiv_Levls[i] == *xDIV)
+				for (uint8_t i=0; i<xdiv_Levels_Size; i++) {
+					if (xdiv_Levels[i] == *xDIV)
 						xlocation = i;
 				}
 			}
 			xlocation += steps;
 			if (xlocation >= (xdiv_Levels_Size - 1)) {xlocation = xdiv_Levels_Size - 1;}
 			else if (xlocation < 0) {xlocation = 0;}
-			*xDIV = xdiv_levels[xlocation];
+			*xDIV = xdiv_Levels[xlocation];
 		}
 		else {
 			//Y-Axis Scaling
 			//Adjust V/Div based on delta
 			float ydiv_Levels[] = {Y_DIV_LEVELS}; //V/div levels
-			int ydiv_Levels_Size = sizeof(ydiv_Levels)/sizeof(ydiv_Levels[0])
+			int ydiv_Levels_Size = sizeof(ydiv_Levels)/sizeof(ydiv_Levels[0]);
 			static int ylocation = 255;
 			if (ylocation == 255) {
-				for (uint8_t i=0; i<ydiv_Levels_Size; i_++) {
-					if (ydiv_Levls[i] == *yDIV)
+				for (uint8_t i=0; i<ydiv_Levels_Size; i++) {
+					if (ydiv_Levels[i] == *yDIV)
 						ylocation = i;
 				}
 			}
 			ylocation += steps;
 			if (ylocation >= (ydiv_Levels_Size - 1)) {ylocation = ydiv_Levels_Size - 1;}
 			else if (ylocation < 0) {ylocation = 0;}
-			*yDIV = ydiv_levels[ylocation];
+			*yDIV = ydiv_Levels[ylocation];
 
 		}
 	}
@@ -383,7 +398,7 @@ void Set_Trig_Value(void) {
 		TIM5_Count = __HAL_TIM_GET_COUNTER(&htim5);
 	}
 	else if (TIM5_New_Count != TIM5_Count) {
-		int steps = (TIM5_New_count - TIM5_Count) / 4;
+		int steps = (TIM5_New_Count - TIM5_Count) / 4;
 		TIM5_Count = TIM5_New_Count;
 		Temp_Trig_Voltage = Trig_Voltage + steps*0.1;
 		if (Temp_Trig_Voltage > 20) {Trig_Voltage = 20;}
@@ -430,12 +445,13 @@ float Auto_Scale_Y(float *buffer) {
 	//Max V/div = 20V/10 = 2V/div
 	//Min V/div = 0.1V/10 = 0.01V/div //Roughly Corresponds to accuracy of ADC
 	float div_Levels[] = {Y_DIV_LEVELS}; //V/div levels
-	float V_div = Vpp / (2.0f * float(Y_DIVIONS)); //Volts per division
+	float V_div = Vpp / (2.0f * float(Y_DIVISIONS)); //Volts per division
 	for (int uint8_t i=0; i<sizeof(div_Levels)/sizeof(div_Levels[0]); i++) {
 		if (V_div <= div_Levels[i]) {
-			return = div_Levels[i];
+			return div_Levels[i];
 		}
 	}
+	return div_Levels[sizeof(div_Levels)/sizeof(div_Levels[0]) - 1];
 }
 
 void ADC_SetTrigger(void) {
@@ -451,6 +467,16 @@ void ADC_SetTrigger(void) {
 	awdConfig.HighThreshold = Trig_ADC_Value;
 	awdConfig.LowThreshold  = 0; // keep low
 	HAL_ADC_AnalogWDGConfig(&hadc1, &awdConfig);
+}
+
+void DWT_Init(void) {
+  CORE_DEBUG->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; // Enable the trace and debug block
+  DWT->CYCCNT = 0; // Reset the cycle counter
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk; // Enable the cycle counter
+}
+
+uint32_t Micros(void) {
+  return DWT->CYCCNT / (SystemCoreClock / 1000000);
 }
 /* USER CODE END 4 */
 
