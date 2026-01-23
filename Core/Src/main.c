@@ -29,6 +29,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <math.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdint.h>
 
 /* USER CODE END Includes */
 
@@ -72,9 +76,24 @@
 #define I2C1_SDA_PIN GPIOB, GPIO_PIN_7
 
 #define ADC_12BIT 4095.0f
+#define VRef 3.3f //V
+#define ATTENUATION_FACTOR 51.0f //51:1
+#define OP_AMP_GAIN 4.0f //Gain of OP-AMP
 #define Sample_rate 50000 //Hz
 #define Sample_period 0.00002f //s (1/Sample_rate)
 #define ADC_BUFFER_SIZE 1024 //Size of ADC DMA buffer
+
+#define X_DIVISIONS 20.0f // 20 X divisions
+#define Y_DEVISIONS 10.0f // +/- 10 Y divisions
+//50Hz input min, 25KHz input max
+//Atleast 10 Waveforms, meaning 2 div per wavefront
+//Min 1 Waveform, meaning 20 div per wavefront
+//Max T(1/50) * (1/2) = 0.01s, Min T(1/25K) * 1/20 = 2e-6s = 0.000002
+#define X_DIV_LEVELS 0.000002f, 0.0000025f, 0.000003f, 0.000004f, 0.000005f, 0.000008f, 0.00001f, 0.000015f, 0.00002f, 0.000025f, 0.00003f, 0.00004f, 0.00005f, 0.00008f, 0.0001f, 0.00015f, 0.0002f, 0.00025f, 0.0003f, 0.0004f, 0.0005f, 0.0008f, 0.001f, 0.0015f, 0.002f, 0.0025f, 0.003f, 0.004f, 0.005f, 0.008f, 0.01f
+//Min is roughly resolution, Max is 20v Peak / no. divisions = 20/10 = 2V
+#define Y_DIV_LEVELS 0.01f, 0.02f, 0.03f, 0.04f, 0.05f, 0.08f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.8f, 1.0f, 1.2f, 1.5f, 1.6f, 2.0f
+#define COUNT_PER_STEP 4 //Count increase on encoder timer per encoder step
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -85,11 +104,20 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+  float BIAS_VOLTAGE = 1.65f; //Bias Voltage
+  uint8_t CHL_Select_State = 0 //Channel Select Button State
+  uint8_t Pause_State = 0; //Pause Button State
+  uint8_t Auto_Scale_Y_State = 1; //Auto Scale Y State
+  uint8_t Scale_Axis_State = 0; //Scale Axis Button State 0->x, 1->y
+  int8_t Trig_Voltage = 0; //Set Initial Trigger Voltage
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+float VBias_Init(uint16_t *adc_buffer);
+float ADC_Scale(uint16_t adc_input);
+float VmaxABS(float *buffer);
+void Auto_Scale_Y(float *buffer);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -139,9 +167,29 @@ int main(void)
   MX_TIM5_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+
   Hal_TIM_Base_Start(&htim3); //Start Timer 3 for ADC trigger
   uint16_t adc_buffer[ADC_BUFFER_SIZE]; //ADC DMA buffer
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, ADC_BUFFER_SIZE); //Start ADC with DMA
+  HAL_Delay(100); //Delay for ADC to stabilise and fill buffer
+  VBias_Init(adc_buffer); //Initialise Bias Voltage
+
+  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL); //Start Encoder 1
+  __HAL_TIM_SET_COUNTER(&htim2, 0x7FFFFFFF); //Set Encoder 1 counter to middle value
+  HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL); //Start Encoder 2
+  __HAL_TIM_SET_COUNTER(&htim5, 0x7FFFFFFF); //Set Encoder 2 counter to middle value
+
+  float Vin_buffer[ADC_BUFFER_SIZE]; //Scaled Voltage buffer
+  ADC_Convert(adc_buffer, Vin_buffer);
+
+  yDIV = 0.5f; //Initial Y Division setting
+  xDIV = 0.0002f; //Initial X Division setting
+  Set_Axis_Div(Vin_buffer, &xDIV, &yDIV); //Initialise Axis Division setting
+  Set_Trig_Value(); //Initialise Trigger Value setting
+
+  ILI9341_Init();
+
+  float plot_buffer[ADC_BUFFER_SIZE];
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -149,6 +197,30 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  if (!CHL_Select_State){
+		  for (uint16_t i=0; i<ADC_BUFFER_SIZE; i++){
+			  plot_Buffer = Vin_buffer[2*i];
+		  }
+	  }
+	  else {
+		  for (uint16_t i=0; i<ADC_BUFFER_SIZE; i++){
+			  plot_Buffer = Vin_buffer[2*i+1];
+		  }
+	  }
+
+	  Set_Axis_Div(plot_buffer, &xDIV, &yDIV); //Update Axis Division setting
+	  Set_Trig_Value(); //Update Trigger Value setting
+
+	  ILI9341_Clear(BLACK);
+	  ILI9341_DrawAxis(Y_DEVISIONS, X_DIVISIONS);
+	  ILI9341_PlotWaveform(plot_buffer,xDIV,yDIV);
+
+
+
+
+
+
+
 
     /* USER CODE BEGIN 3 */
   }
@@ -161,31 +233,149 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
         case GPIO_PIN_14: // PC14 -- CHL_Select Button
             // handle PC14 interrupt
+        	CHL_Select_State = !CHL_Select_State;
             break;
         case GPIO_PIN_13: // PC13 -- Pause Button
             // handle PC13 interrupt
+        	Pause_State = !Pause_State;
             break;
         case GPIO_PIN_11: // PC11 -- Encoder 1 Button
             // handle PC11 interrupt
+        	Auto_Scale_Y_State = 1;
             break;
         case GPIO_PIN_4:  // PB4 -- Scale Axis Button
             // handle PB4 interrupt
+        	Scale_Axis_State = !Scale_Axis_State;
             break;
         case GPIO_PIN_2:  // PA2 -- Encoder 2 Button
             // handle PA2 interrupt
+        	Trig_Voltage = 0; //Reset Trigger Voltage
             break;
     }
 }
 
-void ADC_Scale(uint16_t adc_input, float *scaled_value){
+float VBias_Init(uint16_t *adc_buffer){
+	//Initialise Bias Voltage
+	uint32_t adc_sum = 0;
+	for (int i=0; i<ADC_BUFFER_SIZE; i++) {
+		adc_sum += adc_buffer[i];
+	}
+	BIAS_VOLTAGE = ((float)adc_sum / ADC_BUFFER_SIZE) * (VRef / ADC_12BIT);
+	return;
+}
+
+void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV) {
+	static uint32_t TIM2_Count = 0;
+	uint32_t TIM2_New_Count = __HAL_TIM_GET_COUNTER(&htim2);
+	if (TIM2_Count == 0) {
+		TIM2_Count = __HAL_TIM_GET_COUNTER(&htim2);
+
+	}
+	else if (TIM2_New_Count != TIM2_Count) {
+		int steps = (TIM2_New_count - TIM2_Count) / 4;
+		TIM2_Count = TIM2_New_Count;
+		if (Scale_Axis_State == 0) {
+			//X-Axis Scaling
+			//Adjust Time/Div based on delta
+			float xdiv_Levels[] = {X_DIV_LEVELS}; //V/div levels
+			int xdiv_Levels_Size = sizeof(xdiv_Levels)/sizeof(xdiv_Levels[0])
+			static int xlocation = 255;
+			if (xlocation == 255) {
+				for (uint8_t i=0; i<xdiv_Levels_Size; i_++) {
+					if (xdiv_Levls[i] == *xDIV)
+						xlocation = i;
+				}
+			}
+			xlocation += steps;
+			if (xlocation >= (xdiv_Levels_Size - 1)) {xlocation = xdiv_Levels_Size - 1;}
+			else if (xlocation < 0) {xlocation = 0;}
+			*xDIV = xdiv_levels[xlocation];
+		}
+		else {
+			//Y-Axis Scaling
+			//Adjust V/Div based on delta
+			float ydiv_Levels[] = {Y_DIV_LEVELS}; //V/div levels
+			int ydiv_Levels_Size = sizeof(ydiv_Levels)/sizeof(ydiv_Levels[0])
+			static int ylocation = 255;
+			if (ylocation == 255) {
+				for (uint8_t i=0; i<ydiv_Levels_Size; i_++) {
+					if (ydiv_Levls[i] == *yDIV)
+						ylocation = i;
+				}
+			}
+			ylocation += steps;
+			if (ylocation >= (ydiv_Levels_Size - 1)) {ylocation = ydiv_Levels_Size - 1;}
+			else if (ylocation < 0) {ylocation = 0;}
+			*yDIV = ydiv_levels[ylocation];
+
+		}
+	}
+	if (Auto_Scale_Y_State) {
+		*yDIV = Auto_Scale_Y(buffer); //Auto Scale Y if enabled
+		Auto_Scale_Y_State = 0; //Reset Auto Scale Y State
+	}
+}
+
+void Set_Trig_Value(void) {
+	static uint32_t TIM5_Count = 0;
+	uint32_t TIM5_New_Count = __HAL_TIM_GET_COUNTER(&htim5);
+	if (TIM5_Count == 0) {
+		TIM5_Count = __HAL_TIM_GET_COUNTER(&htim5);
+	}
+	else if (TIM5_New_Count != TIM5_Count) {
+		int steps = (TIM5_New_count - TIM5_Count) / 4;
+		TIM5_Count = TIM5_New_Count;
+		Temp_Trig_Voltage = Trig_Voltage + steps*0.1;
+		if (Temp_Trig_Voltage > 20) {Trig_Voltage = 20;}
+		else if (Temp_Trig_Voltage) {Trig_Voltage = -20;}
+		else {Trig_Voltage = Temp_Trig_Voltage;}
+	}
+}
+
+float ADC_Convert(uint16_t *adc_input, float *Vin ){
 	//Scale ADC input based on schematic design
 	//ADC input range: 0-3.3V (0-4095), VRef = 3.3V
 	//Scope input range: +/-20v
-	//Attenuation factor: 50/51
+	//Attenuation factor: 51:1
 	//Bias: 3.3v/2 = 1.65v
-	//Calculation = (Input-Bias)/Attenuation
-	float Vin = (float)adc_input * (3.3/ADC_12BIT); //Convert ADC value to voltage
-	*scaled_value = (Vin - 1.65) * (51.0f/1.0f); //Scale to scope input voltage
+	//OP-AMP Gain = 4
+	//Vin = (Input-Bias)*(Attenuation Factor)/(OP-AMP Gain)
+	for (int i=0; i<ADC_BUFFER_SIZE; i++){
+		float Vadc = (float)adc_input[i] * (VRef/ADC_12BIT); //Convert ADC value to voltage
+		Vin[i] = (Vadc - BIAS_VOLTAGE) * (ATTENUATION_FACTOR) / (OP_AMP_GAIN); //Multiply by attenuation factor and divide by OP-AMP gain
+	}
+	return;
+}
+
+float VmaxABS(float *buffer) {
+	float max = buffer[0];
+	for (int i=1; i<ADC_BUFFER_SIZE; i++) {
+		if (abs(buffer[i]) > max) {
+			max = abs(buffer[i]);
+		}
+	}
+	return max;
+}
+
+float Auto_Scale_Y(float *buffer) {
+	float Vpp = 2* VmaxABS(buffer);
+	//Screen Height is 240 pixels
+	//Usable height = 200 pixels (20 pixels margin top and bottom)
+	//Scale such that Vpp fits in 200 pixels
+	//Similarly +/- 10 divisions vertically from #define Y_DIVIONS
+	//Max V/div = 20V/10 = 2V/div
+	//Min V/div = 0.1V/10 = 0.01V/div //Roughly Corresponds to accuracy of ADC
+	float div_Levels[] = {Y_DIV_LEVELS}; //V/div levels
+	float V_div = Vpp / (2.0f * float(Y_DIVIONS)); //Volts per division
+	for (int uint8_t i=0; i<sizeof(div_Levels)/sizeof(div_Levels[0]); i++) {
+		if (V_div <= div_Levels[i]) {
+			return = div_Levels[i];
+		}
+	}
+
+
+
+
 }
 
 

@@ -2592,6 +2592,16 @@
 		)
 		(uuid "144bead0-6248-4fec-9046-962fed56e3d8")
 	)
+	(label "IN+1"
+		(at 143.51 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1574f09d-fcee-4dc3-b2f9-f3a4113b584a")
+	)
 	(label "OPA1_IN"
 		(at 132.08 48.26 0)
 		(effects
@@ -2621,6 +2631,16 @@
 			(justify left bottom)
 		)
 		(uuid "e5efdabe-49e1-4c53-b17f-e38d349aa5de")
+	)
+	(label "IN+2"
+		(at 144.78 118.11 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f21daac8-9302-41bb-aa68-562242c6ce93")
 	)
 	(hierarchical_label "Scope_In1"
 		(shape input)
@@ -2820,7 +2840,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "06950a20-1952-4ec1-ad6b-2c56ead4c961")
-		(property "Reference" "R?"
+		(property "Reference" "R27"
 			(at 139.7 73.6599 0)
 			(effects
 				(font
@@ -2889,7 +2909,7 @@
 			)
 			(project "Osciliscope PCB"
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
-					(reference "R?")
+					(reference "R27")
 					(unit 1)
 				)
 			)
@@ -3668,6 +3688,83 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 161.29 118.11 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3f1b31bc-f595-4ab5-aeff-5ba4d289e0c9")
+		(property "Reference" "R30"
+			(at 161.29 124.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "30k"
+			(at 161.29 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 161.29 116.332 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 161.29 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 161.29 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part NO." ""
+			(at 161.29 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a350ba95-3437-4a11-a03d-12257545a24d")
+		)
+		(pin "2"
+			(uuid "974a9dcb-f97a-4ccc-8ca1-23c694c566bc")
+		)
+		(instances
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "R30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 27.94 66.04 0)
 		(unit 1)
@@ -3833,8 +3930,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4c3fa06c-c6de-4942-8024-6d1218e669a9")
-		(property "Reference" "R?"
+		(uuid "47496efe-1799-4ff4-9b72-db3d096c262d")
+		(property "Reference" "R29"
 			(at 158.75 76.2 90)
 			(effects
 				(font
@@ -3878,7 +3975,7 @@
 			)
 		)
 		(property "Part NO." ""
-			(at 158.75 69.85 90)
+			(at 158.75 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3887,21 +3984,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "a5a435cc-2086-4da1-b031-c1ddf25331d0")
+			(uuid "e9b8b4d6-fe8d-43e4-b31d-b0b844cd0587")
 		)
 		(pin "2"
-			(uuid "8e2340f4-ee78-46f8-a585-e120061b8acd")
+			(uuid "6ce644b0-f64e-45d3-b8ef-ce2985298e23")
 		)
 		(instances
-			(project "ADC_Input"
-				(path "/2f23e878-87c8-4989-b421-e1f362801019"
-					(reference "R22")
-					(unit 1)
-				)
-			)
 			(project "Osciliscope PCB"
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
-					(reference "R?")
+					(reference "R29")
 					(unit 1)
 				)
 			)
@@ -4303,7 +4394,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6438fe1c-f346-42da-887c-55b6c000caca")
-		(property "Reference" "R?"
+		(property "Reference" "R28"
 			(at 140.97 121.9199 0)
 			(effects
 				(font
@@ -4372,7 +4463,7 @@
 			)
 			(project "Osciliscope PCB"
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
-					(reference "R?")
+					(reference "R28")
 					(unit 1)
 				)
 			)
@@ -4948,80 +5039,6 @@
 			(project "Osciliscope PCB"
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
 					(reference "D1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 161.29 118.11 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "98c36344-27d2-4410-9909-2f1f0f919898")
-		(property "Reference" "R?"
-			(at 161.29 124.46 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "30k"
-			(at 161.29 121.92 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 161.29 116.332 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 161.29 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 161.29 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "9cbea6ba-8fe4-4000-aee2-0076f624f835")
-		)
-		(pin "2"
-			(uuid "c5d0ab94-5491-4e11-b6ba-925b57b4a4f1")
-		)
-		(instances
-			(project ""
-				(path "/2f23e878-87c8-4989-b421-e1f362801019"
-					(reference "R20")
-					(unit 1)
-				)
-			)
-			(project "Osciliscope PCB"
-				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
-					(reference "R?")
 					(unit 1)
 				)
 			)
