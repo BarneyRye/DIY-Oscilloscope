@@ -106,9 +106,9 @@ uint32_t ILI9341_MapADCtoY(float Vin, float yDIV) {
 	//Centre is 120 i.e. 0v
 	//220 at 0v + yDIV*no.Divs
 	//20 at 0v - yDIV*no.Divs
-	float Vin_Bot = -yDIV*Y_DEVISIONS;
-	float Vin_Top = yDIV*Y_DEVISIONS
-	float yf 20.0f + ((Vin-Vin_Bot)/(Vin_Top-Vin_Bot) * (220.0f-20.0f))
+	float Vin_Bot = -yDIV*Y_DIVISIONS;
+	float Vin_Top = yDIV*Y_DIVISIONS;
+	float yf = 20.0f + ((Vin-Vin_Bot)/(Vin_Top-Vin_Bot) * (220.0f-20.0f));
 	return (uint32_t)yf;
 }
 
@@ -116,16 +116,16 @@ uint16_t ILI9341_MAPTimetoX(uint16_t t, uint16_t points) {
 	//Between 20 -> 280
 	//20 at t=0
 	//280 at t=points-1
-	return 20 + ((t-0)/(points-1-0) * (280-20))
+	return 20 + ((t-0)/(points-1-0) * (280-20));
 }
 
 //Plot Waveform
 void ILI9341_PlotWaveform(float *buffer, float xDIV, float yDIV) {
-	uint32_t time = (uint32_t)xDIV * (uint32_t)X_DEVISIONS;
+	uint32_t time = (uint32_t)xDIV * (uint32_t)X_DIVISIONS;
 	uint16_t points = time/(uint16_t)Sample_period;
 	for (uint16_t i=0; i<points; i++) {
 		uint16_t y = ILI9341_MapADCtoY(buffer[i], yDIV);
-		uint16_t x = ILI9341_MAPTimetoX(i, points)
+		uint16_t x = ILI9341_MAPTimetoX(i, points);
 		ILI9341_DrawPixel(x, y, RED);
 	}
 }
