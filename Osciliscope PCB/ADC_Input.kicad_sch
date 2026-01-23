@@ -1553,10 +1553,10 @@
 		(uuid "08c59496-381e-4b7d-b595-f4005af55894")
 	)
 	(junction
-		(at 184.15 97.79)
+		(at 185.42 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "135e82a1-675d-44e2-962e-300593496ee9")
+		(uuid "2eb4f87d-79dd-43a2-883c-c18c54dc7924")
 	)
 	(junction
 		(at 176.53 81.28)
@@ -1583,6 +1583,12 @@
 		(uuid "814f4305-fefe-41d9-9c6d-bde6d03c06a2")
 	)
 	(junction
+		(at 138.43 118.11)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "81af25d0-8458-4bef-8f80-164fa0fbbd71")
+	)
+	(junction
 		(at 203.2 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1593,6 +1599,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b2c157b6-9d4a-4009-b6c6-65a4816bc096")
+	)
+	(junction
+		(at 137.16 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bc4aff8b-ace6-4608-bfb3-c2884c6427e8")
 	)
 	(junction
 		(at 184.15 48.26)
@@ -1672,7 +1684,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 69.85) (xy 137.16 50.8)
+			(xy 137.16 50.8) (xy 137.16 69.85)
 		)
 		(stroke
 			(width 0)
@@ -1689,16 +1701,6 @@
 			(type default)
 		)
 		(uuid "0bf4efed-ff83-4f38-9fe3-80ba580788fe")
-	)
-	(wire
-		(pts
-			(xy 184.15 119.38) (xy 137.16 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ecbf2bb-8e76-4cac-bc67-6814fdcf2d35")
 	)
 	(wire
 		(pts
@@ -1719,6 +1721,16 @@
 			(type default)
 		)
 		(uuid "163b3772-8f96-4dec-8a78-f8b50f994638")
+	)
+	(wire
+		(pts
+			(xy 162.56 69.85) (xy 184.15 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "18f6b0ec-a43e-4f58-bc29-ab329a7f8278")
 	)
 	(wire
 		(pts
@@ -1822,7 +1834,7 @@
 	)
 	(wire
 		(pts
-			(xy 184.15 97.79) (xy 184.15 119.38)
+			(xy 185.42 97.79) (xy 185.42 118.11)
 		)
 		(stroke
 			(width 0)
@@ -1842,6 +1854,16 @@
 	)
 	(wire
 		(pts
+			(xy 138.43 127) (xy 138.43 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36abb5d1-b5a1-4647-b9c7-03380d81abb0")
+	)
+	(wire
+		(pts
 			(xy 46.99 72.39) (xy 46.99 74.93)
 		)
 		(stroke
@@ -1849,6 +1871,16 @@
 			(type default)
 		)
 		(uuid "384b9762-48e2-4072-b7b9-d88516b37842")
+	)
+	(wire
+		(pts
+			(xy 137.16 78.74) (xy 137.16 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a7cc7ff-7cc6-465a-add9-19cc4e877e8a")
 	)
 	(wire
 		(pts
@@ -1912,7 +1944,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 100.33) (xy 140.97 100.33)
+			(xy 138.43 100.33) (xy 140.97 100.33)
 		)
 		(stroke
 			(width 0)
@@ -1949,6 +1981,26 @@
 			(type default)
 		)
 		(uuid "5416ad89-03a8-4d62-97d5-cdc1c28bd20e")
+	)
+	(wire
+		(pts
+			(xy 138.43 118.11) (xy 138.43 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "588f8b3e-59b6-4e17-b678-3db3f2a377f5")
+	)
+	(wire
+		(pts
+			(xy 138.43 118.11) (xy 157.48 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ae2c32c-a1ba-468d-8fc1-06c0296fc7a4")
 	)
 	(wire
 		(pts
@@ -2132,6 +2184,16 @@
 	)
 	(wire
 		(pts
+			(xy 165.1 118.11) (xy 185.42 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9888b1f8-8610-4c60-8844-7912afca5ff3")
+	)
+	(wire
+		(pts
 			(xy 176.53 30.48) (xy 176.53 31.75)
 		)
 		(stroke
@@ -2292,7 +2354,7 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 119.38) (xy 137.16 100.33)
+			(xy 138.43 100.33) (xy 138.43 118.11)
 		)
 		(stroke
 			(width 0)
@@ -2382,6 +2444,16 @@
 	)
 	(wire
 		(pts
+			(xy 137.16 69.85) (xy 154.94 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d578e413-4955-47f0-a2f7-53fadb21224d")
+	)
+	(wire
+		(pts
 			(xy 46.99 59.69) (xy 46.99 72.39)
 		)
 		(stroke
@@ -2389,16 +2461,6 @@
 			(type default)
 		)
 		(uuid "d57ed83f-a644-4a52-9b3e-fa1249d39f44")
-	)
-	(wire
-		(pts
-			(xy 184.15 69.85) (xy 137.16 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9e2b5f8-ed5c-48d6-ba1c-bca117e71a1f")
 	)
 	(wire
 		(pts
@@ -2452,7 +2514,7 @@
 	)
 	(wire
 		(pts
-			(xy 189.23 97.79) (xy 184.15 97.79)
+			(xy 189.23 97.79) (xy 185.42 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2492,6 +2554,16 @@
 	)
 	(wire
 		(pts
+			(xy 137.16 69.85) (xy 137.16 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4904266-b412-493b-8fb1-2df952201b66")
+	)
+	(wire
+		(pts
 			(xy 203.2 48.26) (xy 196.85 48.26)
 		)
 		(stroke
@@ -2502,7 +2574,7 @@
 	)
 	(wire
 		(pts
-			(xy 176.53 97.79) (xy 184.15 97.79)
+			(xy 176.53 97.79) (xy 185.42 97.79)
 		)
 		(stroke
 			(width 0)
@@ -2739,6 +2811,163 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 137.16 74.93 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "06950a20-1952-4ec1-ad6b-2c56ead4c961")
+		(property "Reference" "R?"
+			(at 139.7 73.6599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10k"
+			(at 139.7 76.1999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 138.938 74.93 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 137.16 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part NO." ""
+			(at 137.16 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "48fa60df-1d2a-42a4-b251-e7d9ed7a88eb")
+		)
+		(pin "2"
+			(uuid "5d59317d-abae-48c4-a9b5-76ba884c2c99")
+		)
+		(instances
+			(project "ADC_Input"
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "R21")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 138.43 129.54 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "10cf5d65-ca9b-4b3f-aacf-ebde25149f98")
+		(property "Reference" "#PWR0102"
+			(at 138.43 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 138.43 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 138.43 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 138.43 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "df454495-001e-43be-a789-313528f59bf8")
+		)
+		(instances
+			(project "ADC_Input"
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "#PWR022")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "#PWR0102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 128.27 104.14 0)
 		(unit 1)
@@ -2766,7 +2995,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 129.2352 107.95 0)
 			(effects
 				(font
@@ -2775,7 +3004,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586178643478892544"
+		(property "Datasheet" ""
 			(at 128.27 104.14 0)
 			(effects
 				(font
@@ -2784,7 +3013,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21B104KCFNNNE"
+		(property "Description" ""
 			(at 128.27 104.14 0)
 			(effects
 				(font
@@ -2793,7 +3022,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C28233"
+		(property "Part NO." ""
 			(at 128.27 104.14 0)
 			(effects
 				(font
@@ -2995,7 +3224,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 130.048 41.91 90)
 			(effects
 				(font
@@ -3004,7 +3233,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 128.27 41.91 0)
 			(effects
 				(font
@@ -3013,7 +3242,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 128.27 41.91 0)
 			(effects
 				(font
@@ -3022,7 +3251,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 128.27 41.91 0)
 			(effects
 				(font
@@ -3152,7 +3381,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 86.868 92.71 90)
 			(effects
 				(font
@@ -3161,7 +3390,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 85.09 92.71 0)
 			(effects
 				(font
@@ -3170,7 +3399,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 85.09 92.71 0)
 			(effects
 				(font
@@ -3179,7 +3408,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 85.09 92.71 0)
 			(effects
 				(font
@@ -3381,7 +3610,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 64.008 43.18 90)
 			(effects
 				(font
@@ -3390,7 +3619,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 62.23 43.18 0)
 			(effects
 				(font
@@ -3399,7 +3628,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 62.23 43.18 0)
 			(effects
 				(font
@@ -3408,7 +3637,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 62.23 43.18 0)
 			(effects
 				(font
@@ -3466,7 +3695,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 28.9052 69.85 0)
 			(effects
 				(font
@@ -3475,7 +3704,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586178643478892544"
+		(property "Datasheet" ""
 			(at 27.94 66.04 0)
 			(effects
 				(font
@@ -3484,7 +3713,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21B104KCFNNNE"
+		(property "Description" ""
 			(at 27.94 66.04 0)
 			(effects
 				(font
@@ -3493,7 +3722,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C28233"
+		(property "Part NO." ""
 			(at 27.94 66.04 0)
 			(effects
 				(font
@@ -3597,6 +3826,89 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 158.75 69.85 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4c3fa06c-c6de-4942-8024-6d1218e669a9")
+		(property "Reference" "R?"
+			(at 158.75 76.2 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "30k"
+			(at 158.75 73.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 158.75 68.072 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 158.75 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 158.75 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part NO." ""
+			(at 158.75 69.85 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a5a435cc-2086-4da1-b031-c1ddf25331d0")
+		)
+		(pin "2"
+			(uuid "8e2340f4-ee78-46f8-a585-e120061b8acd")
+		)
+		(instances
+			(project "ADC_Input"
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "R22")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 102.87 92.71 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3623,7 +3935,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 104.648 92.71 90)
 			(effects
 				(font
@@ -3632,7 +3944,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 102.87 92.71 0)
 			(effects
 				(font
@@ -3641,7 +3953,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 102.87 92.71 0)
 			(effects
 				(font
@@ -3650,7 +3962,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 102.87 92.71 0)
 			(effects
 				(font
@@ -3771,7 +4083,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "10k"
 			(at 40.64 80.0099 0)
 			(effects
 				(font
@@ -3780,7 +4092,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 39.878 78.74 90)
 			(effects
 				(font
@@ -3789,7 +4101,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 38.1 78.74 0)
 			(effects
 				(font
@@ -3798,7 +4110,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 38.1 78.74 0)
 			(effects
 				(font
@@ -3807,7 +4119,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 38.1 78.74 0)
 			(effects
 				(font
@@ -3832,6 +4144,78 @@
 			(project "Osciliscope PCB"
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
 					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 137.16 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "62b36656-5046-4fa2-801b-606b2015f879")
+		(property "Reference" "#PWR0101"
+			(at 137.16 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 137.16 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 137.16 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 137.16 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "42a96cee-7937-48a7-84ae-0c664179c972")
+		)
+		(instances
+			(project "ADC_Input"
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "#PWR023")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "#PWR0101")
 					(unit 1)
 				)
 			)
@@ -3911,6 +4295,91 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 138.43 123.19 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6438fe1c-f346-42da-887c-55b6c000caca")
+		(property "Reference" "R?"
+			(at 140.97 121.9199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "10k"
+			(at 140.97 124.4599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.208 123.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 138.43 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 138.43 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part NO." ""
+			(at 138.43 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "651c7c95-1278-445c-8e6a-ece27586ec3c")
+		)
+		(pin "2"
+			(uuid "4457f978-ab2b-46ac-a4ab-fbfdd991a1ae")
+		)
+		(instances
+			(project "ADC_Input"
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "R19")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 71.12 43.18 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3937,7 +4406,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 72.898 43.18 90)
 			(effects
 				(font
@@ -3946,7 +4415,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 71.12 43.18 0)
 			(effects
 				(font
@@ -3955,7 +4424,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 71.12 43.18 0)
 			(effects
 				(font
@@ -3964,7 +4433,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 71.12 43.18 0)
 			(effects
 				(font
@@ -4020,7 +4489,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 193.04 50.038 90)
 			(effects
 				(font
@@ -4029,7 +4498,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8562006687177089024"
+		(property "Datasheet" ""
 			(at 193.04 48.26 0)
 			(effects
 				(font
@@ -4038,7 +4507,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1000T5E"
+		(property "Description" ""
 			(at 193.04 48.26 0)
 			(effects
 				(font
@@ -4047,7 +4516,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17408"
+		(property "Part NO." ""
 			(at 193.04 48.26 90)
 			(effects
 				(font
@@ -4105,7 +4574,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 109.728 54.61 90)
 			(effects
 				(font
@@ -4114,7 +4583,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 107.95 54.61 0)
 			(effects
 				(font
@@ -4123,7 +4592,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 107.95 54.61 0)
 			(effects
 				(font
@@ -4132,7 +4601,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 107.95 54.61 0)
 			(effects
 				(font
@@ -4485,6 +4954,80 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 161.29 118.11 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "98c36344-27d2-4410-9909-2f1f0f919898")
+		(property "Reference" "R?"
+			(at 161.29 124.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "30k"
+			(at 161.29 121.92 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 161.29 116.332 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 161.29 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 161.29 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9cbea6ba-8fe4-4000-aee2-0076f624f835")
+		)
+		(pin "2"
+			(uuid "c5d0ab94-5491-4e11-b6ba-925b57b4a4f1")
+		)
+		(instances
+			(project ""
+				(path "/2f23e878-87c8-4989-b421-e1f362801019"
+					(reference "R20")
+					(unit 1)
+				)
+			)
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50/df3a70e5-5419-4d97-af41-dbff22d05423"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:+3.3V")
 		(at 176.53 80.01 0)
 		(unit 1)
@@ -4656,7 +5199,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 181.9148 88.9 0)
 			(effects
 				(font
@@ -4665,7 +5208,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586178643478892544"
+		(property "Datasheet" ""
 			(at 182.88 85.09 0)
 			(effects
 				(font
@@ -4674,7 +5217,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21B104KCFNNNE"
+		(property "Description" ""
 			(at 182.88 85.09 0)
 			(effects
 				(font
@@ -4683,7 +5226,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C28233"
+		(property "Part NO." ""
 			(at 182.88 85.09 0)
 			(effects
 				(font
@@ -4740,7 +5283,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 47.9552 82.55 0)
 			(effects
 				(font
@@ -4749,7 +5292,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8588932555597369344"
+		(property "Datasheet" ""
 			(at 46.99 78.74 0)
 			(effects
 				(font
@@ -4758,7 +5301,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21A225KBQNNNE"
+		(property "Description" ""
 			(at 46.99 78.74 0)
 			(effects
 				(font
@@ -4767,7 +5310,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C377773"
+		(property "Part NO." ""
 			(at 46.99 78.74 0)
 			(effects
 				(font
@@ -4897,7 +5440,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 90.678 43.18 90)
 			(effects
 				(font
@@ -4906,7 +5449,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 88.9 43.18 0)
 			(effects
 				(font
@@ -4915,7 +5458,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 88.9 43.18 0)
 			(effects
 				(font
@@ -4924,7 +5467,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 88.9 43.18 0)
 			(effects
 				(font
@@ -4982,7 +5525,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 81.788 43.18 90)
 			(effects
 				(font
@@ -4991,7 +5534,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 80.01 43.18 0)
 			(effects
 				(font
@@ -5000,7 +5543,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 80.01 43.18 0)
 			(effects
 				(font
@@ -5009,7 +5552,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 80.01 43.18 0)
 			(effects
 				(font
@@ -5067,7 +5610,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0805_2012Metric"
+		(property "Footprint" ""
 			(at 220.6752 105.41 0)
 			(effects
 				(font
@@ -5076,7 +5619,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706849202913280"
+		(property "Datasheet" ""
 			(at 219.71 101.6 0)
 			(effects
 				(font
@@ -5085,7 +5628,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21C470JBANNNC"
+		(property "Description" ""
 			(at 219.71 101.6 0)
 			(effects
 				(font
@@ -5094,7 +5637,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C14857"
+		(property "Part NO." ""
 			(at 219.71 101.6 0)
 			(effects
 				(font
@@ -5152,7 +5695,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 95.758 92.71 90)
 			(effects
 				(font
@@ -5161,7 +5704,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 93.98 92.71 0)
 			(effects
 				(font
@@ -5170,7 +5713,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 93.98 92.71 0)
 			(effects
 				(font
@@ -5179,7 +5722,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 93.98 92.71 0)
 			(effects
 				(font
@@ -5237,7 +5780,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 69.088 92.71 90)
 			(effects
 				(font
@@ -5246,7 +5789,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 67.31 92.71 0)
 			(effects
 				(font
@@ -5255,7 +5798,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 67.31 92.71 0)
 			(effects
 				(font
@@ -5264,7 +5807,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 67.31 92.71 0)
 			(effects
 				(font
@@ -5322,7 +5865,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 99.568 43.18 90)
 			(effects
 				(font
@@ -5331,7 +5874,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 97.79 43.18 0)
 			(effects
 				(font
@@ -5340,7 +5883,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 97.79 43.18 0)
 			(effects
 				(font
@@ -5349,7 +5892,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 97.79 43.18 0)
 			(effects
 				(font
@@ -5398,7 +5941,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "10k"
 			(at 40.64 67.3099 0)
 			(effects
 				(font
@@ -5407,7 +5950,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 39.878 66.04 90)
 			(effects
 				(font
@@ -5416,7 +5959,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 38.1 66.04 0)
 			(effects
 				(font
@@ -5425,7 +5968,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 38.1 66.04 0)
 			(effects
 				(font
@@ -5434,7 +5977,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 38.1 66.04 0)
 			(effects
 				(font
@@ -5564,7 +6107,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 110.998 104.14 90)
 			(effects
 				(font
@@ -5573,7 +6116,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 109.22 104.14 0)
 			(effects
 				(font
@@ -5582,7 +6125,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 109.22 104.14 0)
 			(effects
 				(font
@@ -5591,7 +6134,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 109.22 104.14 0)
 			(effects
 				(font
@@ -5719,7 +6262,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 193.04 99.568 90)
 			(effects
 				(font
@@ -5728,7 +6271,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8562006687177089024"
+		(property "Datasheet" ""
 			(at 193.04 97.79 0)
 			(effects
 				(font
@@ -5737,7 +6280,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1000T5E"
+		(property "Description" ""
 			(at 193.04 97.79 0)
 			(effects
 				(font
@@ -5746,7 +6289,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17408"
+		(property "Part NO." ""
 			(at 193.04 97.79 90)
 			(effects
 				(font
@@ -6059,7 +6602,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 181.9148 39.37 0)
 			(effects
 				(font
@@ -6068,7 +6611,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586178643478892544"
+		(property "Datasheet" ""
 			(at 182.88 35.56 0)
 			(effects
 				(font
@@ -6077,7 +6620,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21B104KCFNNNE"
+		(property "Description" ""
 			(at 182.88 35.56 0)
 			(effects
 				(font
@@ -6086,7 +6629,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C28233"
+		(property "Part NO." ""
 			(at 182.88 35.56 0)
 			(effects
 				(font
@@ -6216,7 +6759,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" ""
 			(at 129.2352 58.42 0)
 			(effects
 				(font
@@ -6225,7 +6768,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8586178643478892544"
+		(property "Datasheet" ""
 			(at 128.27 54.61 0)
 			(effects
 				(font
@@ -6234,7 +6777,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21B104KCFNNNE"
+		(property "Description" ""
 			(at 128.27 54.61 0)
 			(effects
 				(font
@@ -6243,7 +6786,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C28233"
+		(property "Part NO." ""
 			(at 128.27 54.61 0)
 			(effects
 				(font
@@ -6301,7 +6844,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 130.048 91.44 90)
 			(effects
 				(font
@@ -6310,7 +6853,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706502699421696"
+		(property "Datasheet" ""
 			(at 128.27 91.44 0)
 			(effects
 				(font
@@ -6319,7 +6862,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1004T5E"
+		(property "Description" ""
 			(at 128.27 91.44 0)
 			(effects
 				(font
@@ -6328,7 +6871,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C17514"
+		(property "Part NO." ""
 			(at 128.27 91.44 0)
 			(effects
 				(font
@@ -6458,7 +7001,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+		(property "Footprint" ""
 			(at 77.978 92.71 90)
 			(effects
 				(font
@@ -6467,7 +7010,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706694794076160"
+		(property "Datasheet" ""
 			(at 76.2 92.71 0)
 			(effects
 				(font
@@ -6476,7 +7019,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0805W8F1005T5E"
+		(property "Description" ""
 			(at 76.2 92.71 0)
 			(effects
 				(font
@@ -6485,7 +7028,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C26108"
+		(property "Part NO." ""
 			(at 76.2 92.71 0)
 			(effects
 				(font
@@ -6543,7 +7086,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0805_2012Metric"
+		(property "Footprint" ""
 			(at 220.6752 55.88 0)
 			(effects
 				(font
@@ -6552,7 +7095,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8579706849202913280"
+		(property "Datasheet" ""
 			(at 219.71 52.07 0)
 			(effects
 				(font
@@ -6561,7 +7104,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "CL21C470JBANNNC"
+		(property "Description" ""
 			(at 219.71 52.07 0)
 			(effects
 				(font
@@ -6570,7 +7113,7 @@
 				(hide yes)
 			)
 		)
-		(property "Part NO." "C14857"
+		(property "Part NO." ""
 			(at 219.71 52.07 0)
 			(effects
 				(font
