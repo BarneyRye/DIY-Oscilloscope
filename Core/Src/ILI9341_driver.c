@@ -120,13 +120,13 @@ uint16_t ILI9341_MAPTimetoX(uint16_t t, uint16_t points) {
 }
 
 //Plot Waveform
-void ILI9341_PlotWaveform(float *buffer, float xDIV, float yDIV) {
+void ILI9341_PlotWaveform(float *buffer, float xDIV, float yDIV, uint16_t colour) {
 	uint32_t time = (uint32_t)xDIV * (uint32_t)X_DIVISIONS;
 	uint16_t points = time/(uint16_t)Sample_period;
 	for (uint16_t i=0; i<points; i++) {
 		uint16_t y = ILI9341_MapADCtoY(buffer[i], yDIV);
 		uint16_t x = ILI9341_MAPTimetoX(i, points);
-		ILI9341_DrawPixel(x, y, RED);
+		ILI9341_DrawPixel(x, y, colour);
 	}
 }
 

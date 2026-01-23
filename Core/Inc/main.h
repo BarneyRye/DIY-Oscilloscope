@@ -31,7 +31,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <math.h>
+#include <stdlib.h>
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -93,7 +95,8 @@ void Error_Handler(void);
 #define Scale_Axis_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-
+extern float Sample_Rate; //Hz
+extern float Sample_period; //s
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
