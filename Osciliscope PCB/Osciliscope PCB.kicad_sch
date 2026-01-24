@@ -6406,7 +6406,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 59.69) (xy 217.17 62.23)
+			(xy 217.17 59.69) (xy 217.17 60.96)
 		)
 		(stroke
 			(width 0)
@@ -7086,7 +7086,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 69.85) (xy 205.74 71.12)
+			(xy 205.74 68.58) (xy 205.74 71.12)
 		)
 		(stroke
 			(width 0)
@@ -7346,7 +7346,7 @@
 	)
 	(wire
 		(pts
-			(xy 113.03 96.52) (xy 110.49 96.52)
+			(xy 110.49 96.52) (xy 127 96.52)
 		)
 		(stroke
 			(width 0)
@@ -7416,7 +7416,7 @@
 	)
 	(wire
 		(pts
-			(xy 205.74 59.69) (xy 205.74 62.23)
+			(xy 205.74 59.69) (xy 205.74 60.96)
 		)
 		(stroke
 			(width 0)
@@ -8306,6 +8306,16 @@
 	)
 	(wire
 		(pts
+			(xy 127 104.14) (xy 127 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0973eb2-7f02-4b14-ab49-c0ccc8f00108")
+	)
+	(wire
+		(pts
 			(xy 168.91 90.17) (xy 152.4 90.17)
 		)
 		(stroke
@@ -8396,7 +8406,7 @@
 	)
 	(wire
 		(pts
-			(xy 217.17 69.85) (xy 217.17 71.12)
+			(xy 217.17 68.58) (xy 217.17 71.12)
 		)
 		(stroke
 			(width 0)
@@ -8904,6 +8914,16 @@
 		)
 		(uuid "36f2a6fa-561a-40b2-8e17-893ef589d7e8")
 	)
+	(label "3V_LED"
+		(at 217.17 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3c84d319-bcd7-4a09-96a7-79315beda8bb")
+	)
 	(label "HSE_IN"
 		(at 172.72 26.67 180)
 		(effects
@@ -9233,6 +9253,16 @@
 			(justify right bottom)
 		)
 		(uuid "cd12ec0a-9bb6-4820-a296-84a0cfbeab72")
+	)
+	(label "5V_LED"
+		(at 205.74 69.85 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfd4ff3f-9636-4e69-818a-43ffb9fc5621")
 	)
 	(label "Encode_2"
 		(at 191.77 120.65 0)
@@ -11404,7 +11434,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 205.74 66.04 0)
+		(at 205.74 64.77 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -11414,7 +11444,7 @@
 		(fields_autoplaced yes)
 		(uuid "463602fc-215d-45c6-a423-ba95bac6b3fc")
 		(property "Reference" "R24"
-			(at 208.28 64.7699 0)
+			(at 208.28 63.4999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11423,7 +11453,7 @@
 			)
 		)
 		(property "Value" "330"
-			(at 208.28 67.3099 0)
+			(at 208.28 66.0399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11432,7 +11462,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 207.518 66.04 90)
+			(at 207.518 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11441,7 +11471,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 205.74 66.04 0)
+			(at 205.74 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11450,7 +11480,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 205.74 66.04 0)
+			(at 205.74 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11459,7 +11489,7 @@
 			)
 		)
 		(property "Part NO." ""
-			(at 205.74 66.04 0)
+			(at 205.74 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13123,6 +13153,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 127 100.33 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7ed0f608-cafa-49ac-bde8-592a9935caeb")
+		(property "Reference" "C28"
+			(at 130.81 99.0599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "100n"
+			(at 130.81 101.5999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 126.0348 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 127 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Part NO." ""
+			(at 127 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "522639d4-4d4c-443b-bf54-f5d699a45dae")
+		)
+		(pin "2"
+			(uuid "11d8e2ac-1ff4-4b75-ba2e-aa18fa94de99")
+		)
+		(instances
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50"
+					(reference "C28")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 274.32 45.72 0)
 		(unit 1)
@@ -13939,7 +14048,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 217.17 66.04 0)
+		(at 217.17 64.77 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13949,7 +14058,7 @@
 		(fields_autoplaced yes)
 		(uuid "a49a10e8-20e8-4656-a95a-b98bade657f3")
 		(property "Reference" "R26"
-			(at 219.71 64.7699 0)
+			(at 219.71 63.4999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13958,7 +14067,7 @@
 			)
 		)
 		(property "Value" "330"
-			(at 219.71 67.3099 0)
+			(at 219.71 66.0399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13967,7 +14076,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 218.948 66.04 90)
+			(at 218.948 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13976,7 +14085,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 217.17 66.04 0)
+			(at 217.17 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13985,7 +14094,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 217.17 66.04 0)
+			(at 217.17 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13994,7 +14103,7 @@
 			)
 		)
 		(property "Part NO." ""
-			(at 217.17 66.04 0)
+			(at 217.17 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15425,6 +15534,72 @@
 			(project ""
 				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50"
 					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 127 105.41 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "df6769f2-95a9-4fbc-9bf5-adc60a041412")
+		(property "Reference" "#PWR019"
+			(at 127 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 127 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 127 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 127 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 127 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1d8da0cb-2a86-4923-bf9d-576fefdd58b1")
+		)
+		(instances
+			(project "Osciliscope PCB"
+				(path "/dbd44bf2-721f-49a6-94a9-d8437df40c50"
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
