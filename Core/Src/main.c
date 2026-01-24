@@ -31,7 +31,6 @@
 /* USER CODE BEGIN Includes */
 #include <math.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <stdint.h>
 
 /* USER CODE END Includes */
@@ -79,9 +78,8 @@
 #define VRef 3.3f //V
 #define ATTENUATION_FACTOR 51.0f //51:1
 #define OP_AMP_GAIN 4.0f //Gain of OP-AMP
-#define Sample_rate 50000 //Hz
-#define Sample_period 0.00002f //s (1/Sample_rate)
-#define ADC_BUFFER_SIZE 22000 //Size of ADC DMA buffer
+#define ADC_BUFFER_SIZE 4096 //Size of ADC DMA buffer
+#define TIM3_CLK 84000000 //Timer 3 Clock Frequency
 
 #define X_DIVISIONS 20.0f // 20 X divisions
 #define Y_DIVISIONS 10.0f // +/- 10 Y divisions
@@ -115,10 +113,13 @@ typedef enum {
   volatile uint8_t Pause_State = 0; //Pause Button State
   volatile uint8_t Auto_Scale_Y_State = 0; //Auto Scale Y State
   volatile uint8_t Scale_Axis_State = 0; //Scale Axis Button State 0->x, 1->y
-  volatile int16_t Trig_Voltage = 0; //Set Initial Trigger Voltage
+  volatile float Trig_Voltage = 0.0f; //Set Initial Trigger Voltage
   volatile uint8_t Trig_Flag = 0;
   volatile uint16_t Trig_ADC_Value = 2048;
   volatile scope_state_t scope_state = SCOPE_ARMED;
+  float Sample_Rate; //Hz
+  float Sample_period; //s
+  uint8_t Screen_Change_Flag = 1; //Flag to indicate screen change
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -203,13 +204,16 @@ int main(void)
 
   ILI9341_Init();
   ILI9341_Clear(BLACK);
+  ILI9341_ClearUI();
+  ILI9341_UpdateVals(xDIV, yDIV, Trig_Voltage);
+  ILI9341_DrawAxis(Y_DIVISIONS, X_DIVISIONS);
 
   static float plot_buffer[ADC_BUFFER_SIZE/2];
 
   DWT_Init(); //Initialize DWT for Micros() function
   uint32_t Last_Trig_Time = Micros(); 
 
-  uint16_t DMA_Index = ADC_BUFFER_SIZE - hdma_adc1.Instance->NDTR; //Get current DMA index
+  uint16_t DMA_Index = 0; //Get current DMA index
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -230,7 +234,7 @@ int main(void)
       scope_state = SCOPE_WAITING;
     }
     if (scope_state == SCOPE_WAITING) {
-      if ((Micros() - Last_Trig_Time) >= Total_Display_Time) {
+      if ((Micros() - Last_Trig_Time) >= Total_Display_Time*1.5f) {
         volatile uint32_t temp_void = hadc1.Instance->DR; //Read DR to clear potential overrun flag
         (void)temp_void;
         __HAL_ADC_ENABLE_IT(&hadc1, ADC_IT_AWD);
@@ -255,15 +259,18 @@ int main(void)
       Wavefront_Index = 0; //No Trigger Found, set to 0
     }
     static float plot_volts[ADC_BUFFER_SIZE/2];
-    ILI9341_PlotWaveform(plot_volts,xDIV,yDIV,BLACK);
     for (uint16_t i=0; i<(DMA_Index/2)-Wavefront_Index; i++) {
       plot_volts[i] = plot_buffer[Wavefront_Index + i];
     }
 
 	  Set_Axis_Div(plot_volts, &xDIV, &yDIV, (DMA_Index/2)-Wavefront_Index); //Update Axis Division setting
 	  Set_Trig_Value(); //Update Trigger Value setting
-
+    if (Screen_Change_Flag) {
+      Screen_Change_Flag = 0;
+      ILI9341_UpdateVals(xDIV, yDIV, Trig_Voltage);
+    }
 	  if (!Pause_State){
+      ILI9341_ClearWaveform();
 		  ILI9341_DrawAxis(Y_DIVISIONS, X_DIVISIONS);
 		  ILI9341_PlotWaveform(plot_volts,xDIV,yDIV,RED);
 	  }
@@ -339,7 +346,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             break;
         case GPIO_PIN_2:  // PA2 -- Encoder 2 Button
             // handle PA2 interrupt
-        	Trig_Voltage = 0; //Reset Trigger Voltage
+        	Trig_Voltage = 0.0f; //Reset Trigger Voltage
             break;
     }
 }
@@ -372,6 +379,7 @@ void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV, uint16_t length) {
   if (Auto_Scale_Y_State) {
 		*yDIV = Auto_Scale_Y(buffer, length, &ylocation); //Auto Scale Y if enabled
 		Auto_Scale_Y_State = 0; //Reset Auto Scale Y State
+    Screen_Change_Flag = 1;
     return;
 	}
   static uint32_t TIM2_Count = 0;
@@ -390,6 +398,11 @@ void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV, uint16_t length) {
 			if (xlocation >= (XDIV_COUNT - 1)) {xlocation = XDIV_COUNT - 1;}
 			else if (xlocation < 0) {xlocation = 0;}
 			*xDIV = xdiv_Levels[xlocation];
+      Screen_Change_Flag = 1;
+      float Total_Display_Time = (*xDIV) * X_DIVISIONS; //Total time (s) displayed on screen
+      Sample_period = Total_Display_Time / (ADC_BUFFER_SIZE/4.0f); //Calculate Sample Period based on 2 channels and 2x bufferring
+      Sample_Rate = (uint32_t)(1.0f / Sample_period); //Calculate Sample Rate
+      Scope_SetSampleRate(Sample_Rate); //Set Sample Rate
 		}
 		else {
 			//Y-Axis Scaling
@@ -398,7 +411,7 @@ void Set_Axis_Div(float *buffer, float *xDIV, float *yDIV, uint16_t length) {
 			if (ylocation >= (YDIV_COUNT - 1)) {ylocation = YDIV_COUNT - 1;}
 			else if (ylocation < 0) {ylocation = 0;}
 			*yDIV = ydiv_Levels[ylocation];
-
+      Screen_Change_Flag = 1;
 		}
 	}
 }
@@ -412,15 +425,16 @@ void Set_Trig_Value(void) {
 	else if (TIM5_New_Count != TIM5_Count) {
 		int steps = ((int32_t)TIM5_New_Count - (int32_t)TIM5_Count) / 4;
 		TIM5_Count = TIM5_New_Count;
-		float Temp_Trig_Voltage = Trig_Voltage + steps*0.1;
-		if (Temp_Trig_Voltage > 20) {Trig_Voltage = 20;}
-		else if (Temp_Trig_Voltage < -20) {Trig_Voltage = -20;}
+		float Temp_Trig_Voltage = Trig_Voltage + (float)steps*0.01f;
+		if (Temp_Trig_Voltage > 20.0f) {Trig_Voltage = 20.0f;}
+		else if (Temp_Trig_Voltage < -20.0f) {Trig_Voltage = -20.0f;}
 		else {Trig_Voltage = Temp_Trig_Voltage;}
 
-		float Trig_Voltage_Adj = ((float)Trig_Voltage / ATTENUATION_FACTOR * OP_AMP_GAIN) + BIAS_VOLTAGE;
+		float Trig_Voltage_Adj = (Trig_Voltage / ATTENUATION_FACTOR * OP_AMP_GAIN) + BIAS_VOLTAGE;
 		Trig_ADC_Value = (uint16_t)(Trig_Voltage_Adj * (ADC_12BIT/VRef));
     if (Trig_ADC_Value > 4095) {Trig_ADC_Value = 4095;}
 		ADC_SetTrigger();
+    Screen_Change_Flag = 1;
 	}
 }
 
@@ -492,13 +506,22 @@ uint32_t Micros(void) {
 }
 
 uint16_t Find_Rising_Edge(float *buffer, uint16_t DMA_Index) {
-  float trig_volts = (float)Trig_Voltage;
   for (uint16_t i = 1; i < DMA_Index; i++) {
-    if (buffer[i - 1] < trig_volts && buffer[i] >= trig_volts) {
+    if (buffer[i - 1] < Trig_Voltage && buffer[i] >= Trig_Voltage) {
       return i;
     }
   }
   return 0; // No rising edge found
+}
+
+void Scope_SetSampleRate(uint32_t fs) {
+  if (fs<1) {fs = 1;}
+  uint32_t arr = (TIM3_CLK / fs) - 1;
+
+  __HAL_TIM_DISABLE(&htim3);
+  __HAL_TIM_SET_AUTORELOAD(&htim3, arr);
+  __HAL_TIM_SET_COUNTER(&htim3, 0);
+  __HAL_TIM_ENABLE(&htim3);
 }
 /* USER CODE END 4 */
 
